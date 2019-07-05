@@ -1,13 +1,16 @@
 FROM openresty/openresty:alpine-fat
 
 # allowed domains should be lua match pattern
-ENV DIFFIE_HELLMAN='' ALLOWED_DOMAINS='.*' AUTO_SSL_VERSION='0.11.1' FORCE_HTTPS='true' SITES='' LETSENCRYPT_URL='https://acme-v01.api.letsencrypt.org/directory'
+ENV DIFFIE_HELLMAN='' ALLOWED_DOMAINS='.*' RESTY_AUTO_SSL_VERSION='0.11.1' FORCE_HTTPS='true' SITES='' LETSENCRYPT_URL='https://acme-v02.api.letsencrypt.org/directory'
+
+# ALLOWED_DOMAINS='.*'
+# ALLOWED_DOMAINS_API='https://check.domain'
 
 # Here we install open resty and generate dhparam.pem file.
 # You can specify DIFFIE_HELLMAN=true to force regeneration of that file on first run
 # also we create fallback ssl keys
 RUN apk --no-cache add bash openssl \
-    && /usr/local/openresty/luajit/bin/luarocks install lua-resty-auto-ssl $AUTO_SSL_VERSION \
+    && /usr/local/openresty/luajit/bin/luarocks install lua-resty-auto-ssl $RESTY_AUTO_SSL_VERSION \
     && openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 \
     -subj '/CN=sni-support-required-for-valid-ssl' \
     -keyout /etc/ssl/resty-auto-ssl-fallback.key \
