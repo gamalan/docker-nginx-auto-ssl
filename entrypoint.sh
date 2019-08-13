@@ -35,6 +35,7 @@ if [ -n "$SITES" ]; then
     RAW_SERVER_ENDPOINT=${NAME_EQ_ENDPOINT#*=}
     export SERVER_NAME=${NAME_EQ_ENDPOINT%=*}
     export SERVER_ENDPOINT=${RAW_SERVER_ENDPOINT#*//}  # it clears url scheme, like http:// or https://
+    echo "$SERVER_NAME $SERVER_ENDPOINT"
     envsubst '$SERVER_NAME $SERVER_ENDPOINT' \
     < ${RESTY_CONF_DIR}/server-proxy.conf \
     > ${NGINX_CONF_DIR}/${SERVER_NAME}.conf

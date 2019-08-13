@@ -1,7 +1,7 @@
 FROM openresty/openresty:alpine-fat
 
 # allowed domains should be lua match pattern
-ENV DIFFIE_HELLMAN='' ALLOWED_DOMAINS='.*' RESTY_AUTO_SSL_VERSION='0.11.1' FORCE_HTTPS='true' SITES='' LETSENCRYPT_URL='https://acme-v02.api.letsencrypt.org/directory'
+ENV DIFFIE_HELLMAN='' ALLOWED_DOMAINS_API='' ALLOWED_DOMAINS='.*' RESTY_AUTO_SSL_VERSION='0.12.0' FORCE_HTTPS='true' SITES='' LETSENCRYPT_URL='https://acme-v01.api.letsencrypt.org/directory'
 
 # ALLOWED_DOMAINS='.*'
 # ALLOWED_DOMAINS_API='https://check.domain'
